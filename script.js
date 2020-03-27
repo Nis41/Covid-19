@@ -1,0 +1,94 @@
+let indiaTotal = document.querySelector("#totalIndia");
+let totCase = document.querySelector("#totalCase");
+let totDeaths = document.querySelector("#totalDeaths");
+let totRecovered = document.querySelector("#totalRecovered");
+let recCases = document.querySelector("#todayCases");
+let recDeaths = document.querySelector("#todayDeaths");
+let tBody = document.querySelector("#tableBody");
+
+getCorona();
+
+function getCorona() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      const data = JSON.parse(this.responseText);
+
+      let totalCases = 0;
+      let totalDeaths = 0;
+      let totalRecovered = 0;
+      let newCases = 0;
+      let newDeaths = 0;
+
+      for (const key in data) {
+        if (data[key].country === "India") {
+          indiaTotal.innerHTML = data[key].cases;
+        }
+
+        totalCases += data[key].cases;
+        totalDeaths += data[key].deaths;
+        totalRecovered += data[key].recovered;
+        newCases += data[key].todayCases;
+        newDeaths += data[key].todayDeaths;
+
+        totCase.innerHTML = totalCases;
+        totDeaths.innerHTML = totalDeaths;
+        totRecovered.innerHTML = totalRecovered;
+        recCases.innerHTML = newCases;
+        recDeaths.innerHTML = newDeaths;
+
+        let tr = document.createElement("tr");
+        tr.className = "table-data";
+        tBody.appendChild(tr);
+
+        let td0 = document.createElement("img");
+        td0.src = data[key].countryInfo.flag;
+        td0.className = "flagImg";
+        tr.appendChild(td0);
+
+        let th = document.createElement("th");
+        th.scope = "row";
+        th.className = "country";
+        th.innerHTML = data[key].country;
+        tr.appendChild(th);
+
+        let td1 = document.createElement("td");
+        td1.className = "spacing";
+        td1.innerHTML = data[key].cases;
+        tr.appendChild(td1);
+
+        let td2 = document.createElement("td");
+        td2.className = "spacing";
+        td2.innerHTML = data[key].active;
+        tr.appendChild(td2);
+
+        let td3 = document.createElement("td");
+        td3.className = "recover spacing";
+        td3.innerHTML = data[key].recovered;
+        tr.appendChild(td3);
+
+        let td4 = document.createElement("td");
+        td4.className = "deaths spacing";
+        td4.innerHTML = data[key].deaths;
+        tr.appendChild(td4);
+
+        let td5 = document.createElement("td");
+        td5.className = "spacing";
+        td5.innerHTML = data[key].critical;
+        tr.appendChild(td5);
+
+        let td6 = document.createElement("td");
+        td6.className = "spacing";
+        td6.innerHTML = data[key].todayCases;
+        tr.appendChild(td6);
+
+        let td7 = document.createElement("td");
+        td7.className = "deaths spacing";
+        td7.innerHTML = data[key].todayDeaths;
+        tr.appendChild(td7);
+      }
+    }
+  };
+  xhttp.open("GET", "https://corona.lmao.ninja/countries", true);
+  xhttp.send();
+}

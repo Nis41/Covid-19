@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Covid-19 Stats</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="a
+      nonymous"
+    />
+
+    <!-- icons cdn -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.ico" type="image/gif" />
+  </head>
+  <body>
+    <!-- Header Start -->
+
+    <header class="header">
+      <div class="title">
+        <a
+          class="nav-a"
+          href="#"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+          >Cases in India
+          <span id="totalIndia" class="badge badge-info"></span>
+        </a>
+      </div>
+
+      <nav class="navigation">
+        <ul class="menu">
+          <li class="navigation-li">
+            <a class="nav-a" href="#">Created by Nisarg H Patel</a>
+          </li>
+          <br class="brTag" />
+          <li class="navigation-li idLink">
+            <a
+              class="nav-a insta"
+              href="https://www.instagram.com/n__i__s__u/"
+              target="_blank"
+              ><i class="fa fa-instagram" aria-hidden="true"></i
+            ></a>
+          </li>
+          <li class="navigation-li idLink">
+            <a class="nav-a git" href="https://github.com/Nis41" target="_blank"
+              ><i class="fa fa-github" aria-hidden="true"></i
+            ></a>
+          </li>
+          <li class="navigation-li  idLink">
+            <a
+              class="nav-a linkedin"
+              href="https://www.linkedin.com/in/nisarg-patel-259003154/"
+              target="_blank"
+              ><i class="fa fa-linkedin" aria-hidden="true"></i
+            ></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- india state wise data starts  -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">COMING SOON</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            India's State Wise Records Coming Soon...
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- india state wise data ends -->
+    <!-- header ends -->
+
+    <!-- boxes starts  -->
+
+    <div class="row">
+      <div class="col-lg-12 boxes totalDiv">
+        total cases <br /><span id="totalCase" class="badge badge-info"></span>
+      </div>
+      <div class="col-lg-3 col-5 col-sm-5 boxes otherChilds">
+        <div>
+          total deaths <br /><span
+            id="totalDeaths"
+            class="badge badge-danger"
+          ></span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6 col-sm-5 boxes otherChilds">
+        <div>
+          total recovered <br /><span
+            id="totalRecovered"
+            class="badge badge-success"
+          ></span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-5 col-sm-5 boxes otherChilds">
+        <div>
+          today cases <br /><span
+            id="todayCases"
+            class="badge badge-info"
+          ></span>
+        </div>
+      </div>
+      <div class="col-lg-3 col-6 col-sm-5 boxes otherChilds">
+        <div>
+          today deaths <br /><span
+            id="todayDeaths"
+            class="badge badge-danger"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- boxes ends  -->
+
+    <div class="tableInfo"><h4>Country wise Records</h4></div>
+
+    <!-- table starts -->
+
+    <div class="tableDiv">
+      <div class="tbl-header">
+        <table class="table table-striped" cellspacing="5" id="table-1">
+          <thead>
+            <tr class="table-data">
+              <th scope="col" class="spacing"></th>
+              <th scope="col" class="country spacing">
+                Country
+              </th>
+              <th scope="col" class="cases spacing">
+                Cases
+              </th>
+              <th scope="col" class="active spacing">
+                Active
+              </th>
+              <th scope="col" class="recover spacing">
+                Recovered
+              </th>
+              <th scope="col" class="deaths spacing">
+                Deaths
+              </th>
+              <th scope="col" class="critical spacing">
+                Critical
+              </th>
+              <th scope="col" class="today spacing">
+                Today Cases
+              </th>
+              <th scope="col" class="deaths spacing">
+                Today Deaths
+              </th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table class="table table-striped" id="table-1">
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- table ends  -->
+
+    <div class="end">
+      <div class="support">Supported by Parshv Shah</div>
+      <a
+        class="nav-a insta"
+        href="https://www.instagram.com/parshv__shah/"
+        target="_blank"
+        ><i class="fa fa-instagram" aria-hidden="true"></i
+      ></a>
+      <a class="nav-a git" href="https://github.com/BittuShah/" target="_blank"
+        ><i class="fa fa-github" aria-hidden="true"></i
+      ></a>
+      <a
+        class="nav-a linkedin"
+        href="https://www.linkedin.com/in/parshv-shah-9313b9162/"
+        target="_blank"
+        ><i class="fa fa-linkedin" aria-hidden="true"></i
+      ></a>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
