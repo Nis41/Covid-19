@@ -335,6 +335,28 @@ td {
     padding-left: 4% !important;
   }
 
+  .tableModal {
+    font-size: 0.6rem;
+  }
+  .state {
+    width: 110px;
+  }
+  .stateCases {
+    width: 90px;
+  }
+
+  #stateTableBody th {
+    width: 222px;
+  }
+
+  #stateTableBody td {
+    font-size: 0.7rem;
+  }
+
+  .stateCasesTd {
+    width: 50px;
+  }
+
   .tableInfo {
     margin-top: 8%;
     padding-top: 3%;

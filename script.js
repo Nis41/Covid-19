@@ -115,26 +115,23 @@ function getStateCorona() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
-      console.log(stateData);
 
       Object.getOwnPropertyNames(stateData).forEach(function(property) {
-        console.log(property + " -> " + stateData[property]);
-
         let tr = document.createElement("tr");
-        tr.className = "table-data";
+        // tr.className = "table-data";
         stBody.appendChild(tr);
 
-        let th = document.createElement("th");
-        th.scope = "row";
-        th.className = "state";
-        th.className = "stateCases";
-        th.innerHTML = property;
-        tr.appendChild(th);
+        let stateTh = document.createElement("th");
+        stateTh.scope = "row";
+        stateTh.className = "state";
+        stateTh.innerHTML = property;
+        tr.appendChild(stateTh);
 
-        let td1 = document.createElement("td");
-        td1.className = "stateCases";
-        td1.innerHTML = stateData[property];
-        tr.appendChild(td1);
+        let stateTd = document.createElement("td");
+        stateTd.className = "stateCases";
+        stateTd.className += "stateCasesTd";
+        stateTd.innerHTML = stateData[property];
+        tr.appendChild(stateTd);
       });
     }
   };
