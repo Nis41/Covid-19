@@ -120,7 +120,7 @@ body {
   margin: 25px 0px 0px 0px;
 }
 .state {
-  width: 180px;
+  width: 240px;
   text-align: center;
 }
 .stateCases {
@@ -128,6 +128,15 @@ body {
   text-align: center;
 }
 
+#stateTableBody th {
+  width: 340px;
+}
+/* #stateTableBody td {
+} */
+
+.stateCasesTd {
+  width: 50px;
+}
 .tableInfo {
   margin-top: 3%;
   padding-top: 1%;
