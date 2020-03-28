@@ -6,11 +6,12 @@ let recCases = document.querySelector("#todayCases");
 let recDeaths = document.querySelector("#todayDeaths");
 let tBody = document.querySelector("#tableBody");
 let stBody = document.querySelector("#stateTableBody");
-let indiaBtn = document.querySelector("#indiaBtn");
+// let indiaBtn = document.querySelector("#indiaBtn");
 
-indiaBtn.onclick = getStateCorona;
+// indiaBtn.onclick = getStateCorona;
 
 getCorona();
+getStateCorona();
 // openLoader();
 
 function getCorona() {
@@ -111,12 +112,27 @@ function closeLoader() {
 }
 
 function getStateCorona() {
-  var xhttp = new XMLHttpRequest();
+  let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
 
-      Object.getOwnPropertyNames(stateData).forEach(function(property) {
+      let stateDataCopy = stateData;
+      let sortable = [];
+      for (let stateName in stateDataCopy) {
+        sortable.push([stateName, stateDataCopy[stateName]]);
+      }
+
+      sortable.sort(function(a, b) {
+        return b[1] - a[1];
+      });
+
+      let stateDataSorted = {};
+      sortable.forEach(function(item) {
+        stateDataSorted[item[0]] = item[1];
+      });
+
+      Object.getOwnPropertyNames(stateDataSorted).forEach(function(property) {
         let tr = document.createElement("tr");
         // tr.className = "table-data";
         stBody.appendChild(tr);
@@ -130,7 +146,7 @@ function getStateCorona() {
         let stateTd = document.createElement("td");
         stateTd.className = "stateCases";
         stateTd.className += "stateCasesTd";
-        stateTd.innerHTML = stateData[property];
+        stateTd.innerHTML = stateDataSorted[property];
         tr.appendChild(stateTd);
       });
     }
