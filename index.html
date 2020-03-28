@@ -26,21 +26,38 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="modal.css" />
     <link rel="icon" href="favicon.ico" type="image/gif" />
   </head>
   <body>
+    <!-- preloader  -->
+    <div class="loader" id="loader">
+      <div class="loaderContent">
+        <img src="preloader.gif" class="loaderImg" alt="preloader" />
+      </div>
+    </div>
+    <!-- preloader ends -->
+
     <!-- Header Start -->
 
     <header class="header">
       <div class="title">
-        <a
+        <!-- <a
           class="nav-a"
           href="#"
           data-toggle="modal"
           data-target="#exampleModalCenter"
           >Cases in India
           <span id="totalIndia" class="badge badge-info"></span>
-        </a>
+        </a> -->
+        <button
+          type="button"
+          class="btn btn-info nav-a"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          India <span id="totalIndia" class="badge badge-light"></span>
+        </button>
       </div>
 
       <nav class="navigation">

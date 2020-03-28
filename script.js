@@ -7,6 +7,7 @@ let recDeaths = document.querySelector("#todayDeaths");
 let tBody = document.querySelector("#tableBody");
 
 getCorona();
+// openLoader();
 
 function getCorona() {
   var xhttp = new XMLHttpRequest();
@@ -86,9 +87,21 @@ function getCorona() {
         td7.className = "deaths spacing";
         td7.innerHTML = data[key].todayDeaths;
         tr.appendChild(td7);
+
+        closeLoader();
       }
     }
   };
   xhttp.open("GET", "https://corona.lmao.ninja/countries", true);
   xhttp.send();
+}
+
+function openLoader() {
+  var loader = document.querySelector(".loader");
+  loader.style.display = "block";
+}
+
+function closeLoader() {
+  let loader = document.querySelector(".loader");
+  loader.style.display = "none";
 }
