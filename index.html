@@ -52,6 +52,7 @@
         </a> -->
         <button
           type="button"
+          id="indiaBtn"
           class="btn btn-info nav-a"
           data-toggle="modal"
           data-target="#exampleModalCenter"
@@ -103,9 +104,11 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 90% !important;">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">COMING SOON</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              India's State Wise Records
+            </h5>
             <button
               type="button"
               class="close"
@@ -116,16 +119,39 @@
             </button>
           </div>
           <div class="modal-body">
-            India's State Wise Records Coming Soon...
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
+            <div class="stateTableDiv">
+              <div class="stateTbl-header">
+                <table class="table table-striped" cellspacing="5" id="table-1">
+                  <thead>
+                    <tr class="table-data">
+                      <th scope="col" class="state">
+                        State
+                      </th>
+                      <th scope="col" class="stateCases">
+                        Cases
+                      </th>
+                      <!-- <th scope="col" class="stateActive">
+                        Active
+                      </th>
+                      <th scope="col" class="stateRecover">
+                        Recovered
+                      </th>
+                      <th scope="col" class="stateDeaths">
+                        Deaths
+                      </th>
+                      <th scope="col" class="stateToday">
+                        New Cases
+                      </th> -->
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tbl-content">
+                <table class="table table-striped" id="table-1">
+                  <tbody id="stateTableBody"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>

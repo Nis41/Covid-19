@@ -5,6 +5,10 @@ let totRecovered = document.querySelector("#totalRecovered");
 let recCases = document.querySelector("#todayCases");
 let recDeaths = document.querySelector("#todayDeaths");
 let tBody = document.querySelector("#tableBody");
+let stBody = document.querySelector("#stateTableBody");
+let indiaBtn = document.querySelector("#indiaBtn");
+
+indiaBtn.onclick = getStateCorona;
 
 getCorona();
 // openLoader();
@@ -104,4 +108,41 @@ function openLoader() {
 function closeLoader() {
   let loader = document.querySelector(".loader");
   loader.style.display = "none";
+}
+
+function getStateCorona() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      const stateData = JSON.parse(this.responseText);
+      console.log(stateData);
+
+      Object.getOwnPropertyNames(stateData).forEach(function(property) {
+        console.log(property + " -> " + stateData[property]);
+
+        let tr = document.createElement("tr");
+        tr.className = "table-data";
+        stBody.appendChild(tr);
+
+        let th = document.createElement("th");
+        th.scope = "row";
+        th.className = "state";
+        th.className = "stateCases";
+        th.innerHTML = property;
+        tr.appendChild(th);
+
+        let td1 = document.createElement("td");
+        td1.className = "stateCases";
+        td1.innerHTML = stateData[property];
+        tr.appendChild(td1);
+      });
+    }
+  };
+
+  xhttp.open(
+    "GET",
+    "https://script.googleusercontent.com/macros/echo?user_content_key=7bBaHyF-ouc2aM5hgKStaihXIt1RdXMvJZtQUmV2SvNX4BCdwwGCeYjsp334fPOjBowmgHB4Povyhrai0wfDK382jAeesogvm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnKXFvsR88vL4WiBr168omFadgngDnj25DLpEvLRaiIpzZr1NvbW-Bo38vshdDBv10tpytj_A4aoE&lib=Mm1FD1HVuydJN5yAB3dc_e8h00DPSBbB3",
+    true
+  );
+  xhttp.send();
 }

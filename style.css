@@ -119,6 +119,14 @@ body {
 .otherChilds {
   margin: 25px 0px 0px 0px;
 }
+.state {
+  width: 180px;
+  text-align: center;
+}
+.stateCases {
+  width: 100px;
+  text-align: center;
+}
 
 .tableInfo {
   margin-top: 3%;
