@@ -20,6 +20,10 @@ function getCorona() {
     if (this.readyState == 4 && this.status == 200) {
       const data = JSON.parse(this.responseText);
 
+      data.sort(function(a, b) {
+        return b.cases - a.cases;
+      });
+
       let totalCases = 0;
       let totalDeaths = 0;
       let totalRecovered = 0;
