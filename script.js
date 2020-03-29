@@ -10,8 +10,8 @@ let stBody = document.querySelector("#stateTableBody");
 
 // indiaBtn.onclick = getStateCorona;
 
-getCorona();
 getStateCorona();
+getCorona();
 // openLoader();
 
 function getCorona() {
@@ -32,7 +32,7 @@ function getCorona() {
 
       for (const key in data) {
         if (data[key].country === "India") {
-          indiaTotal.innerHTML = data[key].cases;
+          // indiaTotal.innerHTML = data[key].cases;
         }
 
         totalCases += data[key].cases;
@@ -121,44 +121,82 @@ function getStateCorona() {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
 
-      let stateDataCopy = stateData;
-      let sortable = [];
-      for (let stateName in stateDataCopy) {
-        sortable.push([stateName, stateDataCopy[stateName]]);
+      // console.log(stateData);
+
+      // for (const state in stateData) {
+      //   for (const dist in state) {
+      //     console.log(dist);
+      //   }
+      // }
+
+      let indiaRecord = 0;
+
+      // for (const state in stateData) {
+      //   for (const districtData in stateData[state]) {
+      //     console.log(stateData[state]);
+      //     for (const cityNames in stateData[state][districtData]) {
+      //       const finalObj = stateData[state][districtData][cityNames];
+      //       indiaRecord += finalObj.confirmed;
+      //       console.log(finalObj);
+      //     }
+      //   }
+      // }
+      // console.log(indiaRecord);
+
+      // return;
+
+      // let stateDataCopy = stateData;
+      // let sortable = [];
+      // for (let stateName in stateDataCopy) {
+      //   sortable.push([stateName, stateDataCopy[stateName]]);
+      // }
+
+      // sortable.sort(function(a, b) {
+      //   return b[1] - a[1];
+      // });
+
+      // let stateDataSorted = {};
+      // sortable.forEach(function(item) {
+      //   stateDataSorted[item[0]] = item[1];
+      // });
+
+      for (const state in stateData) {
+        // console.log(state);
+        let stateTotal = 0;
+        for (const district in stateData[state]) {
+          for (const cities in stateData[state][district]) {
+            city = stateData[state][district][cities];
+            stateTotal += city.confirmed;
+          }
+          if (state === "Unknown") continue;
+          // console.log("State: " + state + "  totalCase: " + stateTotal);
+          let tr = document.createElement("tr");
+          // tr.className = "table-data";
+          stBody.appendChild(tr);
+          let stateTh = document.createElement("th");
+          stateTh.scope = "row";
+          stateTh.className = "state";
+          stateTh.innerHTML = state;
+          tr.appendChild(stateTh);
+          let stateTd = document.createElement("td");
+          stateTd.className = "stateCases";
+          stateTd.className += "stateCasesTd";
+          stateTd.innerHTML = stateTotal;
+          tr.appendChild(stateTd);
+        }
+
+        if (state === "Unknown") continue;
+        indiaRecord += stateTotal;
       }
 
-      sortable.sort(function(a, b) {
-        return b[1] - a[1];
-      });
-
-      let stateDataSorted = {};
-      sortable.forEach(function(item) {
-        stateDataSorted[item[0]] = item[1];
-      });
-
-      Object.getOwnPropertyNames(stateDataSorted).forEach(function(property) {
-        let tr = document.createElement("tr");
-        // tr.className = "table-data";
-        stBody.appendChild(tr);
-
-        let stateTh = document.createElement("th");
-        stateTh.scope = "row";
-        stateTh.className = "state";
-        stateTh.innerHTML = property;
-        tr.appendChild(stateTh);
-
-        let stateTd = document.createElement("td");
-        stateTd.className = "stateCases";
-        stateTd.className += "stateCasesTd";
-        stateTd.innerHTML = stateDataSorted[property];
-        tr.appendChild(stateTd);
-      });
+      // console.log("India", indiaRecord);
+      indiaTotal.innerHTML = indiaRecord;
     }
   };
 
   xhttp.open(
     "GET",
-    "https://script.googleusercontent.com/macros/echo?user_content_key=7bBaHyF-ouc2aM5hgKStaihXIt1RdXMvJZtQUmV2SvNX4BCdwwGCeYjsp334fPOjBowmgHB4Povyhrai0wfDK382jAeesogvm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnKXFvsR88vL4WiBr168omFadgngDnj25DLpEvLRaiIpzZr1NvbW-Bo38vshdDBv10tpytj_A4aoE&lib=Mm1FD1HVuydJN5yAB3dc_e8h00DPSBbB3",
+    "https://api.covid19india.org/state_district_wise.json",
     true
   );
   xhttp.send();
