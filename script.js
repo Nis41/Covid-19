@@ -19,7 +19,7 @@ function getCorona() {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       const data = JSON.parse(this.responseText);
-
+      // console.log(data);
       data.sort(function(a, b) {
         return b.cases - a.cases;
       });
@@ -117,79 +117,68 @@ function closeLoader() {
 
 function getStateCorona() {
   let xhttp = new XMLHttpRequest();
+
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
 
       // console.log(stateData);
 
-      // for (const state in stateData) {
-      //   for (const dist in state) {
-      //     console.log(dist);
-      //   }
-      // }
-
-      let indiaRecord = 0;
-
-      // for (const state in stateData) {
-      //   for (const districtData in stateData[state]) {
-      //     console.log(stateData[state]);
-      //     for (const cityNames in stateData[state][districtData]) {
-      //       const finalObj = stateData[state][districtData][cityNames];
-      //       indiaRecord += finalObj.confirmed;
-      //       console.log(finalObj);
-      //     }
-      //   }
-      // }
-      // console.log(indiaRecord);
-
-      // return;
-
-      // let stateDataCopy = stateData;
-      // let sortable = [];
-      // for (let stateName in stateDataCopy) {
-      //   sortable.push([stateName, stateDataCopy[stateName]]);
-      // }
-
-      // sortable.sort(function(a, b) {
-      //   return b[1] - a[1];
-      // });
-
-      // let stateDataSorted = {};
-      // sortable.forEach(function(item) {
-      //   stateDataSorted[item[0]] = item[1];
-      // });
-
+      var newStateData = {}; //creating a new object to sort data
       for (const state in stateData) {
-        // console.log(state);
-        let stateTotal = 0;
+        let stateCasesTotal = 0;
+
         for (const district in stateData[state]) {
           for (const cities in stateData[state][district]) {
             city = stateData[state][district][cities];
-            stateTotal += city.confirmed;
+            stateCasesTotal += city.confirmed;
           }
-          if (state === "Unknown") continue;
-          // console.log("State: " + state + "  totalCase: " + stateTotal);
-          let tr = document.createElement("tr");
-          // tr.className = "table-data";
-          stBody.appendChild(tr);
-          let stateTh = document.createElement("th");
-          stateTh.scope = "row";
-          stateTh.className = "state";
-          stateTh.innerHTML = state;
-          tr.appendChild(stateTh);
-          let stateTd = document.createElement("td");
-          stateTd.className = "stateCases";
-          stateTd.className += "stateCasesTd";
-          stateTd.innerHTML = stateTotal;
-          tr.appendChild(stateTd);
+          // console.log("State: " + state + " case: " + stateCasesTotal);
+          newStateData[state] = stateCasesTotal; //over new object is ready with state name and total cases
         }
-
-        if (state === "Unknown") continue;
-        indiaRecord += stateTotal;
       }
 
-      // console.log("India", indiaRecord);
+      let newstateDataCopy = newStateData; //giving a copy of new object for sorting
+      let sortable = [];
+      for (let stateName in newstateDataCopy) {
+        sortable.push([stateName, newstateDataCopy[stateName]]);
+      }
+
+      sortable.sort(function(a, b) {
+        return b[1] - a[1]; //sorting in decending order
+      });
+
+      let stateDataSorted = {};
+      sortable.forEach(function(item) {
+        stateDataSorted[item[0]] = item[1];
+      });
+
+      // console.log(stateDataSorted);
+      let indiaRecord = 0;
+
+      for (const stateName in stateDataSorted) {
+        if (stateName === "Unknown") continue;
+
+        let tr = document.createElement("tr");
+        // tr.className = "table-data";
+        stBody.appendChild(tr);
+
+        let stateTh = document.createElement("th");
+        stateTh.scope = "row";
+        stateTh.className = "state";
+        stateTh.innerHTML = stateName;
+        tr.appendChild(stateTh);
+
+        let stateTd = document.createElement("td");
+        stateTd.className = "stateCases";
+        stateTd.className += "stateCasesTd";
+        stateTd.innerHTML = stateDataSorted[stateName];
+        tr.appendChild(stateTd);
+
+        if (stateName === "Unknown") continue;
+        indiaRecord += stateDataSorted[stateName];
+      }
+      console.log("India", indiaRecord);
       indiaTotal.innerHTML = indiaRecord;
     }
   };
