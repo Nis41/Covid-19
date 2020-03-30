@@ -9,12 +9,12 @@ body {
   background: url("img.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: "Roboto Font";
+  font-family: "Roboto Font", cursive;
 }
 
 @font-face {
   font-family: "Roboto Font";
-  src: url("./Open_Sans/OpenSans-Regular.ttf");
+  src: url("./Roboto/Roboto-Regular.ttf");
 }
 
 * {
