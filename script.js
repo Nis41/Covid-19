@@ -178,7 +178,7 @@ function getStateCorona() {
         if (stateName === "Unknown") continue;
         indiaRecord += stateDataSorted[stateName];
       }
-      console.log("India", indiaRecord);
+      // console.log("India", indiaRecord);
       indiaTotal.innerHTML = indiaRecord;
     }
   };
