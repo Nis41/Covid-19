@@ -1,4 +1,5 @@
 let indiaTotal = document.querySelector("#totalIndia");
+let gujaratTotal = document.querySelector("#totalGujarat");
 let totCase = document.querySelector("#totalCase");
 let totDeaths = document.querySelector("#totalDeaths");
 let totRecovered = document.querySelector("#totalRecovered");
@@ -6,13 +7,10 @@ let recCases = document.querySelector("#todayCases");
 let recDeaths = document.querySelector("#todayDeaths");
 let tBody = document.querySelector("#tableBody");
 let stBody = document.querySelector("#stateTableBody");
-// let indiaBtn = document.querySelector("#indiaBtn");
-
-// indiaBtn.onclick = getStateCorona;
+let gjBody = document.querySelector("#gujaratTableBody");
 
 getStateCorona();
 getCorona();
-// openLoader();
 
 function getCorona() {
   var xhttp = new XMLHttpRequest();
@@ -31,21 +29,20 @@ function getCorona() {
       let newDeaths = 0;
 
       for (const key in data) {
-        if (data[key].country === "India") {
-          // indiaTotal.innerHTML = data[key].cases;
+        if (data[key].country === "World") {
+          totalCases = data[key].cases;
+          totalDeaths = data[key].deaths;
+          totalRecovered = data[key].recovered;
+          newCases = data[key].todayCases;
+          newDeaths = data[key].todayDeaths;
+
+          totCase.innerHTML = totalCases;
+          totDeaths.innerHTML = totalDeaths;
+          totRecovered.innerHTML = totalRecovered;
+          recCases.innerHTML = newCases;
+          recDeaths.innerHTML = newDeaths;
+          continue;
         }
-
-        totalCases += data[key].cases;
-        totalDeaths += data[key].deaths;
-        totalRecovered += data[key].recovered;
-        newCases += data[key].todayCases;
-        newDeaths += data[key].todayDeaths;
-
-        totCase.innerHTML = totalCases;
-        totDeaths.innerHTML = totalDeaths;
-        totRecovered.innerHTML = totalRecovered;
-        recCases.innerHTML = newCases;
-        recDeaths.innerHTML = newDeaths;
 
         let tr = document.createElement("tr");
         tr.className = "table-data";
@@ -125,6 +122,7 @@ function getStateCorona() {
       // console.log(stateData);
 
       var newStateData = {}; //creating a new object to sort data
+      var gujaratData = {}; //creating a new object for gujarat data
       for (const state in stateData) {
         let stateCasesTotal = 0;
 
@@ -132,11 +130,18 @@ function getStateCorona() {
           for (const cities in stateData[state][district]) {
             city = stateData[state][district][cities];
             stateCasesTotal += city.confirmed;
+
+            if (state === "Gujarat") {
+              gujaratData[cities] = city.confirmed;
+              // console.log("District: " + cities + " case: " + city.confirmed);
+            }
           }
           // console.log("State: " + state + " case: " + stateCasesTotal);
           newStateData[state] = stateCasesTotal; //over new object is ready with state name and total cases
         }
       }
+
+      getGujaratCorona(gujaratData); //passing gujarat data object to a function
 
       let newstateDataCopy = newStateData; //giving a copy of new object for sorting
       let sortable = [];
@@ -189,4 +194,45 @@ function getStateCorona() {
     true
   );
   xhttp.send();
+}
+
+function getGujaratCorona(gujaratData) {
+  // console.log(gujaratData);
+
+  let newgujaratDataCopy = gujaratData; //giving a copy of new object for sorting
+  let sortable = [];
+  for (let distName in newgujaratDataCopy) {
+    sortable.push([distName, newgujaratDataCopy[distName]]);
+  }
+
+  sortable.sort(function(a, b) {
+    return b[1] - a[1]; //sorting in decending order
+  });
+
+  let gujaratDataSorted = {};
+  sortable.forEach(function(item) {
+    gujaratDataSorted[item[0]] = item[1];
+  });
+
+  let gujaratRecord = 0;
+  for (dist in gujaratDataSorted) {
+    let tr = document.createElement("tr");
+    gjBody.appendChild(tr);
+
+    let stateTh = document.createElement("th");
+    stateTh.scope = "row";
+    stateTh.className = "state";
+    stateTh.innerHTML = dist;
+    tr.appendChild(stateTh);
+
+    let stateTd = document.createElement("td");
+    stateTd.className = "stateCases";
+    stateTd.className += "stateCasesTd";
+    stateTd.innerHTML = gujaratDataSorted[dist];
+    tr.appendChild(stateTd);
+
+    gujaratRecord += gujaratDataSorted[dist];
+  }
+  // console.log("India", indiaRecord);
+  gujaratTotal.innerHTML = gujaratRecord;
 }
