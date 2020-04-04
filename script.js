@@ -14,11 +14,11 @@ getCorona();
 
 function getCorona() {
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       const data = JSON.parse(this.responseText);
       // console.log(data);
-      data.sort(function(a, b) {
+      data.sort(function (a, b) {
         return b.cases - a.cases;
       });
 
@@ -29,20 +29,17 @@ function getCorona() {
       let newDeaths = 0;
 
       for (const key in data) {
-        if (data[key].country === "World") {
-          totalCases = data[key].cases;
-          totalDeaths = data[key].deaths;
-          totalRecovered = data[key].recovered;
-          newCases = data[key].todayCases;
-          newDeaths = data[key].todayDeaths;
+        totalCases += data[key].cases;
+        totalDeaths += data[key].deaths;
+        totalRecovered += data[key].recovered;
+        newCases += data[key].todayCases;
+        newDeaths += data[key].todayDeaths;
 
-          totCase.innerHTML = totalCases;
-          totDeaths.innerHTML = totalDeaths;
-          totRecovered.innerHTML = totalRecovered;
-          recCases.innerHTML = newCases;
-          recDeaths.innerHTML = newDeaths;
-          continue;
-        }
+        totCase.innerHTML = totalCases;
+        totDeaths.innerHTML = totalDeaths;
+        totRecovered.innerHTML = totalRecovered;
+        recCases.innerHTML = newCases;
+        recDeaths.innerHTML = newDeaths;
 
         let tr = document.createElement("tr");
         tr.className = "table-data";
@@ -115,7 +112,7 @@ function closeLoader() {
 function getStateCorona() {
   let xhttp = new XMLHttpRequest();
 
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
 
@@ -149,12 +146,12 @@ function getStateCorona() {
         sortable.push([stateName, newstateDataCopy[stateName]]);
       }
 
-      sortable.sort(function(a, b) {
+      sortable.sort(function (a, b) {
         return b[1] - a[1]; //sorting in decending order
       });
 
       let stateDataSorted = {};
-      sortable.forEach(function(item) {
+      sortable.forEach(function (item) {
         stateDataSorted[item[0]] = item[1];
       });
 
@@ -205,12 +202,12 @@ function getGujaratCorona(gujaratData) {
     sortable.push([distName, newgujaratDataCopy[distName]]);
   }
 
-  sortable.sort(function(a, b) {
+  sortable.sort(function (a, b) {
     return b[1] - a[1]; //sorting in decending order
   });
 
   let gujaratDataSorted = {};
-  sortable.forEach(function(item) {
+  sortable.forEach(function (item) {
     gujaratDataSorted[item[0]] = item[1];
   });
 
