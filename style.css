@@ -354,6 +354,10 @@ td {
   .state {
     width: 110px;
   }
+  .GujDist {
+    width: 200px;
+    text-align: center;
+  }
   .stateCases {
     width: 90px;
   }

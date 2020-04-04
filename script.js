@@ -221,13 +221,11 @@ function getGujaratCorona(gujaratData) {
 
     let stateTh = document.createElement("th");
     stateTh.scope = "row";
-    stateTh.className = "state";
+    stateTh.className = "GujDist";
     stateTh.innerHTML = dist;
     tr.appendChild(stateTh);
 
     let stateTd = document.createElement("td");
-    stateTd.className = "stateCases";
-    stateTd.className += "stateCasesTd";
     stateTd.innerHTML = gujaratDataSorted[dist];
     tr.appendChild(stateTd);
 
