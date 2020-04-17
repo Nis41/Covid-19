@@ -272,7 +272,12 @@ td {
   }
 
   #gujaratBtn {
-    margin-top: 10% !important;
+    margin-top: 12% !important;
+    width: 110% !important;
+  }
+
+  #indiaBtn {
+    width: 110%;
   }
 
   .navigation {
@@ -317,18 +322,22 @@ td {
     text-transform: capitalize;
     font-size: 1.3rem;
   }
-
   .boxes span {
     margin-top: 5%;
   }
-
-  .totalDiv span {
-    margin-top: 5%;
+  .updated {
+    font-size: 0.7rem;
+    font-style: italic;
   }
 
-  .totalDiv,
+  #totalCase {
+    margin-top: 4%;
+  }
   .otherChilds div {
     padding-top: 6%;
+  }
+  .totalDiv {
+    padding-top: 1%;
   }
 
   .otherChilds {

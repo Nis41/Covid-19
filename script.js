@@ -8,6 +8,7 @@ let recDeaths = document.querySelector("#todayDeaths");
 let tBody = document.querySelector("#tableBody");
 let stBody = document.querySelector("#stateTableBody");
 let gjBody = document.querySelector("#gujaratTableBody");
+let updatedSpan = document.querySelector("#updated");
 
 getStateCorona();
 getCorona();
@@ -17,6 +18,7 @@ function getCorona() {
     if (this.readyState == 4 && this.status == 200) {
       const data = JSON.parse(this.responseText);
       // console.log(data);
+
       data.sort(function (a, b) {
         return b.cases - a.cases;
       });
@@ -26,8 +28,10 @@ function getCorona() {
       let totalRecovered = 0;
       let newCases = 0;
       let newDeaths = 0;
-
+      let lastUpdate = 0;
       for (const key in data) {
+        lastUpdate = data[0].updated;
+
         totalCases += data[key].cases;
         totalDeaths += data[key].deaths;
         totalRecovered += data[key].recovered;
@@ -89,9 +93,33 @@ function getCorona() {
         td7.className = "deaths spacing";
         td7.innerHTML = data[key].todayDeaths;
         tr.appendChild(td7);
-
-        closeLoader();
       }
+      const dateObj = new Date(lastUpdate);
+      const hours = dateObj.getHours();
+      const minutes = dateObj.getMinutes();
+      const seconds = dateObj.getSeconds();
+
+      const formattedTime =
+        hours.toString() + ":" + minutes.toString() + ":" + seconds.toString();
+
+      function tConvert(time) {
+        // Check correct time format and split into components
+        time = time
+          .toString()
+          .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+        if (time.length > 1) {
+          // If time format correct
+          time = time.slice(1); // Remove full string match value
+          time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
+          time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join(""); // return adjusted time or original string
+      }
+
+      let updatedText = "Last Updated At " + tConvert(formattedTime);
+      updatedSpan.innerHTML = updatedText;
+      closeLoader();
     }
   };
   xhttp.open("GET", "https://corona.lmao.ninja/v2/countries", true);
@@ -212,6 +240,7 @@ function getGujaratCorona(gujaratData) {
 
   let gujaratRecord = 0;
   for (dist in gujaratDataSorted) {
+    if (dist === "Unknown") continue;
     let tr = document.createElement("tr");
     gjBody.appendChild(tr);
 
