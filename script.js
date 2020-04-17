@@ -11,7 +11,6 @@ let gjBody = document.querySelector("#gujaratTableBody");
 
 getStateCorona();
 getCorona();
-
 function getCorona() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -95,7 +94,7 @@ function getCorona() {
       }
     }
   };
-  xhttp.open("GET", "https://corona.lmao.ninja/countries", true);
+  xhttp.open("GET", "https://corona.lmao.ninja/v2/countries", true);
   xhttp.send();
 }
 
@@ -116,7 +115,7 @@ function getStateCorona() {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
 
-      // console.log(stateData);
+      //console.log(stateData);
 
       var newStateData = {}; //creating a new object to sort data
       var gujaratData = {}; //creating a new object for gujarat data
