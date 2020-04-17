@@ -100,14 +100,21 @@ body {
 
 .totalDiv {
   background-color: rgba(254, 244, 243, 0.8);
+  height: 140px;
 }
 
 .boxes span {
   margin-top: 7%;
 }
 
-.totalDiv span {
+#totalCase {
   margin-top: 1.5%;
+  margin-top: 0;
+}
+
+.updated {
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 .otherChilds div {
@@ -328,6 +335,10 @@ td {
   .updated {
     font-size: 0.7rem;
     font-style: italic;
+  }
+
+  .totalDiv {
+    height: 120px;
   }
 
   #totalCase {

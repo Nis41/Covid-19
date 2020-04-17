@@ -116,7 +116,6 @@ function getCorona() {
         }
         return time.join(""); // return adjusted time or original string
       }
-
       let updatedText = "Last Updated At " + tConvert(formattedTime);
       updatedSpan.innerHTML = updatedText;
       closeLoader();
