@@ -142,7 +142,7 @@ function getStateCorona() {
     if (this.readyState == 4 && this.status == 200) {
       const stateData = JSON.parse(this.responseText);
 
-      //console.log(stateData);
+      // console.log(stateData);
 
       var newStateData = {}; //creating a new object to sort data
       var gujaratData = {}; //creating a new object for gujarat data
@@ -150,10 +150,11 @@ function getStateCorona() {
         let stateCasesTotal = 0;
 
         for (const district in stateData[state]) {
+          if (district === "statecode") continue; //api owner was giving two fileds to i NAN was coming so i just conituned it.
+
           for (const cities in stateData[state][district]) {
             city = stateData[state][district][cities];
             stateCasesTotal += city.confirmed;
-
             if (state === "Gujarat") {
               gujaratData[cities] = city.confirmed;
               // console.log("District: " + cities + " case: " + city.confirmed);
