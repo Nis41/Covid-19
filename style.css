@@ -46,6 +46,10 @@ body {
   /*border: 1px solid black;*/
 }
 
+.close:focus {
+  outline: 0;
+}
+
 .createdBy {
   margin-top: 0.4%;
   text-align: center;
@@ -59,7 +63,7 @@ body {
   display: inline-flex;
   padding: 0 !important;
   margin-top: -2%;
-  }
+}
 
 .menu {
   margin-right: auto;
@@ -135,7 +139,8 @@ body {
   font-size: 15px;
   width: auto;
   margin-bottom: 0;
-  margin-left: 25px;
+  margin-left: 0;
+  margin-top: 4px;
 }
 
 .spanCount {
@@ -143,25 +148,25 @@ body {
   margin-top: 3px;
 }
 
-.leftBtn{
+.leftBtn {
   position: absolute;
   top: 0px;
   height: inherit;
   margin-right: 5px;
 }
 
-.rightBtn{
+.rightBtn {
   position: absolute;
   top: 0px;
   right: 0;
-  height: inherit; 
+  height: inherit;
 }
 
 .sBtn {
   border-radius: 7px;
   border: none;
   height: inherit;
-  background-color:  rgba(254, 244, 243, 0.5);
+  background-color: rgba(254, 244, 243, 0.5);
   text-align: center;
   width: auto;
 }
@@ -386,7 +391,7 @@ td {
     /*border: 1px solid black;*/
   }
 
-  .createdBy{
+  .createdBy {
     text-align: center;
   }
 
@@ -406,13 +411,13 @@ td {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .navigation-li {
     padding: 0px;
   }
 
   .nav-a {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 200;
     line-height: 10px;
   }
@@ -421,7 +426,7 @@ td {
   }
 
   .linkContainer {
-    margin-left: 15%;
+    margin-left: 11%;
   }
 
   .idLink {
