@@ -301,7 +301,7 @@ if(window.screen.width < 480 && window.screen.width > 320){
 }
 
 function lbClick(){
-  console.log("Left Button Clicked!");
+  // console.log("Left Button Clicked!");
 
   if(left <= 0){
     left = 31;
@@ -418,7 +418,9 @@ window.addEventListener("onload", loadSlider(left, right + incr));
 function btnOnClick(e){
   // console.log(e.target.name);
 
-  var gujaratData = {}; //creating a new object for gujarat data
+  if(e.target.name){
+
+    var gujaratData = {}; //creating a new object for gujarat data
       for (const state in copyStateData) {
         // let stateCasesTotal = 0;
 
@@ -443,6 +445,10 @@ function btnOnClick(e){
       getGujaratCorona(gujaratData, e.target.name);
 
   // console.log("Button Clicked!");
+
+  }
+
+  
 }
 
 

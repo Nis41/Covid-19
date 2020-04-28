@@ -136,6 +136,8 @@ body {
   width: auto;
   margin-bottom: 0;
   margin-left: 25px;
+  transition: all 2s ease-in-out;
+
 }
 
 .spanCount {
